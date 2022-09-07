@@ -4,7 +4,6 @@ const CastomizeError = require('../errors/CastomizeError');
 const Forbidden = require('../errors/Forbidden');
 
 const getCards = (req, res, next) => {
-  console.log(req);
   Card.find({})
     .then((cards) => {
       res.send(cards);

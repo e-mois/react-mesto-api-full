@@ -36,7 +36,7 @@ function App(props) {
         setCards(res)
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err.name)
       });
     }
     
@@ -49,7 +49,7 @@ function App(props) {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err.name);
     });
   }
 
@@ -59,7 +59,7 @@ function App(props) {
       setCards((state) => state.filter(item => item._id !== card._id));
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err.name);
     })
   }
 
@@ -106,7 +106,7 @@ function App(props) {
       closeAllPopups();
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err.name);
     })
   }
 
@@ -117,7 +117,7 @@ function App(props) {
       closeAllPopups();
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err.name)
     })
   }
 
@@ -128,7 +128,7 @@ function App(props) {
       closeAllPopups();
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err.name);
     })
   }
 
@@ -140,7 +140,7 @@ function App(props) {
     })
     .catch((err) => {
       handlePopupWithoutFormOpen(false);
-      console.log(err);
+      console.log(err.name);
     })
   }
 
@@ -163,7 +163,7 @@ function App(props) {
     })
     .catch((err) => {
       handlePopupWithoutFormOpen(false);
-      console.log(err);
+      console.log(err.name);
     })
   }
 
@@ -223,12 +223,12 @@ function App(props) {
           }
           setPageData(userData);
           setLoggedIn(true)
-          //props.history.push('/')
+          props.history.push('/')
           
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.name);
       })
     }
   }, [loggedIn]);

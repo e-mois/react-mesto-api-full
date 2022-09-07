@@ -127,12 +127,12 @@ const login = (req, res, next) => {
       }
       // создадим токен
       const token = jwt.sign({ _id: user._id }, 'secret-code', { expiresIn: '7d' });
-
       // запишем токен в куки
       res
         .cookie('access_token', token, {
-          httpOnly: true,
+          
           secure: process.env.NODE_ENV === 'production',
+          sameSite: false,
         })
         .send({ message: 'Аутентификация прошла успешно' });
     })
@@ -140,7 +140,7 @@ const login = (req, res, next) => {
 };
 
 const getCurrentUser = (req, res, next) => {
-  console.log(`1: ${req.user}`);
+  console.log(`1: ${req.body}`);
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {

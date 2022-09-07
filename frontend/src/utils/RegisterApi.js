@@ -42,10 +42,11 @@ class RegisterApi {
 }
 
 const registerApi = new RegisterApi({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://localhost:3001',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include',
 });
 
 export default registerApi;

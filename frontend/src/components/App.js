@@ -87,18 +87,6 @@ function App(props) {
     setSelectedCard({});
   }
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     api.getUser()
-  //     .then(res => {
-  //       setCurrentUser(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     });
-  //   }
-  // }, [loggedIn])
-
   function handleUpdateUser(data) {
     api.editProfile(data)
     .then((res) => {
@@ -149,68 +137,12 @@ function App(props) {
     .then((res) => {
       setLoggedIn(true);
       props.history.push('/');
-      /*if (res.token) {
-        localStorage.setItem('token', res.token);
-        setLoggedIn(true);
-        setPageData({
-          'email': data.email,
-        });
-        setLoggedIn(true)
-        props.history.push('/');
-      } else {
-        return;
-      }*/
     })
     .catch((err) => {
       handlePopupWithoutFormOpen(false);
       console.log(err.name);
     })
   }
-
-  // function checkToken() {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     registerApi.getContent(token)
-  //     .then((data) => {
-  //       if (data) {
-  //         const userData = {
-  //           'email': data.data.email,
-  //         }
-  //         setPageData(userData);
-  //         setLoggedIn(true)
-  //         props.history.push('/')
-          
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //   }
-  // }
-
-  // function getCurUser() {
-    
-  //   registerApi.getContent()
-  //   .then((data) => {
-  //     if (data) {
-  //       const userData = {
-  //         'email': data.data.email,
-  //       }
-  //       setPageData(userData);
-  //       setLoggedIn(true)
-  //       props.history.push('/')
-        
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-    
-  // }
-
-  // useEffect(() => {
-  //   checkToken();
-  // }, [])
 
   useEffect(() => {
     if (loggedIn) {
@@ -219,7 +151,7 @@ function App(props) {
         if (data) {
           setCurrentUser(data);
           const userData = {
-            'email': data.data.email,
+            'email': data.email,
           }
           setPageData(userData);
           setLoggedIn(true)

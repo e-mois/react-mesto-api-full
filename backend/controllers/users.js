@@ -115,8 +115,6 @@ const updateAvatar = (req, res, next) => {
     });
 };
 
-// controllers/users.js
-
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
@@ -125,12 +123,9 @@ const login = (req, res, next) => {
       if (!user) {
         next(new NotFound());
       }
-      // создадим токен
-      const token = jwt.sign({ _id: user._id }, 'secret-code', { expiresIn: '7d' });
-      // запишем токен в куки
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'secret-code', { expiresIn: '7d' });
       res
         .cookie('access_token', token, {
-          
           secure: process.env.NODE_ENV === 'production',
           sameSite: false,
         })
@@ -140,7 +135,6 @@ const login = (req, res, next) => {
 };
 
 const getCurrentUser = (req, res, next) => {
-  console.log(`1: ${req.body}`);
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {

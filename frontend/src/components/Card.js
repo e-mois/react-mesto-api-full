@@ -5,12 +5,12 @@ function Card(props) {
 
   const currentUser = useContext(CurrentUserContext);
 
-  const isOwn = props.elem.owner._id === currentUser._id;
+  const isOwn = props.elem.owner === currentUser._id;
   const cardDeleteButtonClassName = (
     `element__trashbin ${isOwn ? 'element__trashbin_visible' : ''}`
   );
 
-  const isLiked = props.elem.likes.some(i => i._id === currentUser._id);
+  const isLiked = props.elem.likes.some(i => i === currentUser._id);
   const cardLikeButtonClassName = (
     `element__like ${isLiked ? 'element__like_type_active' : ''}`
   ); 

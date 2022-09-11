@@ -11,7 +11,7 @@ class RegisterApi {
   }
 
   register(data) {
-    return fetch(`${this._options.baseUrl}/signup`, {
+    return fetch('/signup', {
       method: 'POST',
       headers: this._options.headers,
       body: JSON.stringify(data)
@@ -20,21 +20,19 @@ class RegisterApi {
   }
 
   authorize(data) {
-    return fetch(`${this._options.baseUrl}/signin`, {
+    return fetch('/signin', {
       method: 'POST',
       headers: this._options.headers,
+      credentials: this._options.credentials,
       body: JSON.stringify(data)
     })
     .then(this._checkResponseStatus)
   }
 
   getContent() {
-    return fetch(`${this._options.baseUrl}/users/me`, {
-      // headers: {
-      //   "Authorization" : `Bearer ${token}`,
-      //   'Content-Type': 'application/json'
-      // }
+    return fetch('/users/me', {
       headers: this._options.headers,
+      credentials: this._options.credentials,
     })
     .then(this._checkResponseStatus)
   }
@@ -42,7 +40,6 @@ class RegisterApi {
 }
 
 const registerApi = new RegisterApi({
-  baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },

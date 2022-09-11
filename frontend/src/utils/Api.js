@@ -11,65 +11,73 @@ class Api {
   }
 
   getUser() {
-    return fetch(`${this._options.baseUrl}/users/me`, {
-      headers: this._options.headers
+    return fetch('/users/me', {
+      headers: this._options.headers,
+      credentials: this._options.credentials,
     })
     .then(this._checkResponseStatus);
   }
 
   getCards() {
-    return fetch(`${this._options.baseUrl}/cards`, {
-      headers: this._options.headers
+    return fetch('/cards', {
+      headers: this._options.headers,
+      credentials: this._options.credentials,
     })
     .then(this._checkResponseStatus);
   }
 
   editProfile(data) {
-    return fetch(`${this._options.baseUrl}/users/me`, {
+    return fetch('/users/me', {
       method: 'PATCH',
       headers: this._options.headers,
+      credentials: this._options.credentials,
       body: JSON.stringify(data)
     })
     .then(this._checkResponseStatus);
   }
 
   addNewCard(data) {
-    return fetch(`${this._options.baseUrl}/cards`, {
+    return fetch('/cards', {
       method: 'POST',
       headers: this._options.headers,
+      credentials: this._options.credentials,
       body: JSON.stringify(data)
     })
     .then(this._checkResponseStatus);
   }
 
   deleteCard(cardID) {
-    return fetch(`${this._options.baseUrl}/cards/${cardID}`, {
+    return fetch(`/cards/${cardID}`, {
       method: 'DELETE',
       headers: this._options.headers,
+      credentials: this._options.credentials,
     })
     .then(this._checkResponseStatus);
   }
 
   toggleLike(cardID, isLiked) {
     if (!isLiked) {
-      return fetch(`${this._options.baseUrl}/cards/${cardID}/likes`, {
+      return fetch(`/cards/${cardID}/likes`, {
         method: 'PUT',
-        headers: this._options.headers
+        headers: this._options.headers,
+        credentials: this._options.credentials,
       })
       .then(this._checkResponseStatus);
     } else {
       return fetch(`${this._options.baseUrl}/cards/${cardID}/likes`, {
         method: 'DELETE',
-        headers: this._options.headers
+        headers: this._options.headers,
+        credentials: this._options.credentials,
       })
       .then(this._checkResponseStatus);
     } 
   }
 
   changeAvatar(data) {
-    return fetch(`${this._options.baseUrl}/users/me/avatar`, {
+    return fetch('/users/me/avatar', {
       method: 'PATCH',
       headers: this._options.headers,
+      credentials: this._options.credentials,
       body: JSON.stringify({ avatar: data.link })
     })
     .then(this._checkResponseStatus);
@@ -78,7 +86,6 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },

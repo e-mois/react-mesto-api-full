@@ -23,7 +23,7 @@ class RegisterApi {
     return fetch(`${this._options.baseUrl}/signin`, {
       method: 'POST',
       headers: this._options.headers,
-      credentials: this._options.credentials,
+      credentials: 'include',
       body: JSON.stringify(data)
     })
     .then(this._checkResponseStatus)
@@ -40,7 +40,7 @@ class RegisterApi {
 }
 
 const registerApi = new RegisterApi({
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.emoiseev.mesto.nomoredomains.sbs',
   headers: {
     'Content-Type': 'application/json',
   },

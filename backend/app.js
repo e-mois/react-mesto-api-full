@@ -11,7 +11,7 @@ const { auth } = require('./middlewares/auth');
 const getErrorMessage = require('./middlewares/getErrorMessage');
 const NotFound = require('./errors/NotFound');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('./middlewares/cors');
+const corsMW = require('./middlewares/cors');
 
 const { PORT = 3001 } = process.env;
 
@@ -25,7 +25,7 @@ app.use(requestLogger);
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors);
+app.use(corsMW);
 
 app.get('/crash-test', () => {
   setTimeout(() => {

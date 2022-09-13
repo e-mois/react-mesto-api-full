@@ -11,7 +11,7 @@ class RegisterApi {
   }
 
   register(data) {
-    return fetch('/signup', {
+    return fetch(`${this._options.baseUrl}/signup`, {
       method: 'POST',
       headers: this._options.headers,
       body: JSON.stringify(data)
@@ -20,7 +20,7 @@ class RegisterApi {
   }
 
   authorize(data) {
-    return fetch('/signin', {
+    return fetch(`${this._options.baseUrl}/signin`, {
       method: 'POST',
       headers: this._options.headers,
       credentials: this._options.credentials,
@@ -30,7 +30,7 @@ class RegisterApi {
   }
 
   getContent() {
-    return fetch('/users/me', {
+    return fetch(`${this._options.baseUrl}/users/me`, {
       headers: this._options.headers,
       credentials: this._options.credentials,
     })
@@ -40,6 +40,7 @@ class RegisterApi {
 }
 
 const registerApi = new RegisterApi({
+  baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },

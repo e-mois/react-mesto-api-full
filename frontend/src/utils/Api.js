@@ -11,7 +11,7 @@ class Api {
   }
 
   getUser() {
-    return fetch('/users/me', {
+    return fetch(`${this._options.baseUrl}/users/me`, {
       headers: this._options.headers,
       credentials: this._options.credentials,
     })
@@ -19,7 +19,7 @@ class Api {
   }
 
   getCards() {
-    return fetch('/cards', {
+    return fetch(`${this._options.baseUrl}/cards`, {
       headers: this._options.headers,
       credentials: this._options.credentials,
     })
@@ -27,7 +27,7 @@ class Api {
   }
 
   editProfile(data) {
-    return fetch('/users/me', {
+    return fetch(`${this._options.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._options.headers,
       credentials: this._options.credentials,
@@ -37,7 +37,7 @@ class Api {
   }
 
   addNewCard(data) {
-    return fetch('/cards', {
+    return fetch(`${this._options.baseUrl}/cards`, {
       method: 'POST',
       headers: this._options.headers,
       credentials: this._options.credentials,
@@ -47,7 +47,7 @@ class Api {
   }
 
   deleteCard(cardID) {
-    return fetch(`/cards/${cardID}`, {
+    return fetch(`${this._options.baseUrl}/cards/${cardID}`, {
       method: 'DELETE',
       headers: this._options.headers,
       credentials: this._options.credentials,
@@ -57,7 +57,7 @@ class Api {
 
   toggleLike(cardID, isLiked) {
     if (!isLiked) {
-      return fetch(`/cards/${cardID}/likes`, {
+      return fetch(`${this._options.baseUrl}/cards/${cardID}/likes`, {
         method: 'PUT',
         headers: this._options.headers,
         credentials: this._options.credentials,
@@ -74,7 +74,7 @@ class Api {
   }
 
   changeAvatar(data) {
-    return fetch('/users/me/avatar', {
+    return fetch(`${this._options.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._options.headers,
       credentials: this._options.credentials,
@@ -86,6 +86,7 @@ class Api {
 }
 
 const api = new Api({
+  baseUrl: 'https://api.emoiseev.mesto.nomoredomains.sbs',
   headers: {
     'Content-Type': 'application/json',
   },

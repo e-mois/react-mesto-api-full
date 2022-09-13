@@ -3,7 +3,6 @@ const NotAuthError = require('../errors/NotAuthError');
 
 const auth = (req, res, next) => {
   const token = req.cookies.access_token;
-  console.log(req.cookies);
 
   if (!token) {
     next(new NotAuthError('Необходима авторизация'));
@@ -12,7 +11,7 @@ const auth = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'secret-code');
+    payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'secret-code');
   } catch (err) {
     next(new NotAuthError('Необходима авторизация'));
     return;

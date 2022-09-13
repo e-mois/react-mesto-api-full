@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const { celebrate, Joi } = require('celebrate');
-const cors = require('cors');
 const routerUser = require('./routes/routesUser');
 const routerCard = require('./routes/routesCard');
 const { login, createUser } = require('./controllers/users');
@@ -12,6 +11,7 @@ const { auth } = require('./middlewares/auth');
 const getErrorMessage = require('./middlewares/getErrorMessage');
 const NotFound = require('./errors/NotFound');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const { PORT = 3001 } = process.env;
 
@@ -21,11 +21,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
-app.use(cors());
-
 app.use(requestLogger);
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(cors);
 
 app.get('/crash-test', () => {
   setTimeout(() => {

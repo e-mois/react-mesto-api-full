@@ -123,7 +123,7 @@ const login = (req, res, next) => {
       if (!user) {
         next(new NotFound());
       }
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'secret-code', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'secret-code', { expiresIn: '7d' });
       res
         .cookie('access_token', token, {
           secure: process.env.NODE_ENV === 'production',
